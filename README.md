@@ -1,3 +1,31 @@
-![Kattni's GitHub stats](https://github-readme-stats.vercel.app/api?username=thomas-kichelm&theme=tokyonight&show_icons=true)
-[![](https://visitcount.itsvg.in/api?id=Thomas&label=Profile%20Views&color=12&icon=3&pretty=true)](https://visitcount.itsvg.in)
-![Metrics](https://metrics.lecoq.io/thomas-kichelm?template=classic&languages=1&habits=1&projects=1&introduction=1&base=header%2C%20activity%2C%20community%2C%20repositories%2C%20metadata&base.indepth=false&base.hireable=false&base.skip=false&languages=false&languages.limit=8&languages.threshold=0%25&languages.other=false&languages.colors=github&languages.sections=most-used&languages.indepth=false&languages.analysis.timeout=15&languages.analysis.timeout.repositories=7.5&languages.categories=markup%2C%20programming&languages.recent.categories=markup%2C%20programming&languages.recent.load=300&languages.recent.days=14&habits=false&habits.from=200&habits.days=14&habits.facts=true&habits.charts=false&habits.charts.type=classic&habits.trim=false&habits.languages.limit=8&habits.languages.threshold=0%25&projects=false&projects.limit=4&projects.descriptions=false&introduction=false&introduction.title=true&config.timezone=Europe%2FParis)
+# Visit https://github.com/lowlighter/metrics#-documentation for full reference
+name: Metrics
+on:
+  # Schedule updates (each hour)
+  schedule: [{cron: "0 * * * *"}]
+  # Lines below let you run workflow manually and on each commit
+  workflow_dispatch:
+  push: {branches: ["master", "main"]}
+jobs:
+  github-metrics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: lowlighter/metrics@latest
+        with:
+          # Your GitHub token
+          # The following scopes are required:
+          #  - public_access (default scope)
+          # The following additional scopes may be required:
+          #  - read:org      (for organization related metrics)
+          #  - read:user     (for user related data)
+          #  - read:packages (for some packages related data)
+          #  - repo          (optional, if you want to include private repositories)
+          token: ${{ secrets.METRICS_TOKEN }}
+
+          # Options
+          user: thomas-kichelm
+          template: classic
+          base: header, activity, community, repositories, metadata
+          config_timezone: Europe/Paris
